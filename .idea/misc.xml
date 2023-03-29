@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/7MinutesWorkout/app/src/main/res/layout/activity_exercise.xml" value="0.38697916666666665" />
+        <entry key="..\:/7MinutesWorkout/app/src/main/res/drawable/circular_progress.xml" value="0.39692307692307693" />
+        <entry key="..\:/7MinutesWorkout/app/src/main/res/drawable/circular_progress_gray.xml" value="0.39692307692307693" />
+        <entry key="..\:/7MinutesWorkout/app/src/main/res/drawable/item_circular_color_background.xml" value="0.39692307692307693" />
+        <entry key="..\:/7MinutesWorkout/app/src/main/res/layout/activity_exercise.xml" value="0.3133971291866029" />
         <entry key="app/src/main/res/drawable/item_circular_color_accent_border.xml" value="0.13333333333333333" />
         <entry key="app/src/main/res/drawable/item_color_accent_border_ripple_background.xml" value="0.13333333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.125" />
