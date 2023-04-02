@@ -17,7 +17,7 @@ class ExerciseActivity : AppCompatActivity() {
     private var exerciseProgress = 0
 
     private var exerciseList : ArrayList<ExerciseModel>? = null
-    private var currentExercusePosition = -1
+    private var currentExercisePosition = -1
 
     private var binding:ActivityExerciseBinding? = null
 
@@ -54,6 +54,11 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setRestProgressBar() {
+        binding?.flRestView?.visibility = View.VISIBLE
+        binding?.tvTitle?.visibility = View.VISIBLE
+        binding?.flExerciseView?.visibility = View.INVISIBLE
+        binding?.tvExerciseName?.visibility = View.INVISIBLE
+        binding?.ivImage?.visibility = View.INVISIBLE
 
         binding?.progressBar?.progress = restProgress // Sets the current progress to the specified value.
 
@@ -66,23 +71,27 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                currentExercusePosition++
+                currentExercisePosition++
                 setupExerciseView()
             }
         }.start()
     }
 
     private fun setupExerciseView() {
-
-        binding?.flProgressBar?.visibility = View.INVISIBLE
-        binding?.tvTitle?.text = "Exercise Name"
+        binding?.flRestView?.visibility = View.INVISIBLE
+        binding?.tvTitle?.visibility = View.INVISIBLE
         binding?.flExerciseView?.visibility = View.VISIBLE
+        binding?.tvExerciseName?.visibility = View.VISIBLE
+        binding?.ivImage?.visibility = View.VISIBLE
 
 
         if (exerciseTimer != null) {
             exerciseTimer?.cancel()
             exerciseProgress = 0
         }
+
+        binding?.ivImage?.setImageResource(exerciseList!![currentExercisePosition].getImage())
+        binding?.tvExerciseName?.text = exerciseList!![currentExercisePosition].getName()
 
         setExerciseProgressBar()
     }
@@ -99,11 +108,15 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Toast.makeText(
-                    this@ExerciseActivity,
-                    "This is 30 seconds completed so now we will add all the exercises.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                if(currentExercisePosition < exerciseList?.size!! - 1) {
+                    setupRestView()
+                }else {
+                    Toast.makeText(
+                        this@ExerciseActivity,
+                        "Congratulations! You have completed the 7 minutes workout.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }.start()
     }
