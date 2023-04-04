@@ -1,5 +1,7 @@
 package eu.tutorials.a7_minutesworkoutapp
 
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -34,7 +36,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentExercisePosition = -1 // Current Position of Exercise.
 
     private var tts: TextToSpeech? = null
-
+    private var player: MediaPlayer? = null
 
     // END
     // create a binding variable
@@ -73,6 +75,17 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
      */
     private fun setupRestView() {
 // TODO (Step 3- changing the upcoming exercise label and name visibility.)
+
+        try{
+            val soundURI = Uri.parse(
+                "android.resource://eu.tutorials.a7_minutesworkoutapp/" + R.raw.press_start)
+            player = MediaPlayer.create(applicationContext,  soundURI)
+            player?.isLooping = false
+            player?.start()
+        }catch(e : Exception) {
+            e.printStackTrace()
+        }
+
         binding?.flRestView?.visibility = View.VISIBLE
         binding?.tvTitle?.visibility = View.VISIBLE
         binding?.upcomingLabel?.visibility = View.VISIBLE
@@ -226,6 +239,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if(tts != null) {
             tts!!.stop()
             tts!!.shutdown()
+        }
+
+        if(player != null) {
+            player!!.stop()
         }
 
         super.onDestroy()
